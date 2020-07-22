@@ -11,6 +11,7 @@
 		F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214624C5998E00B1DA7B /* NavVC.swift */; };
 		F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214924C5A07C00B1DA7B /* Backend.swift */; };
 		F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214B24C5A37800B1DA7B /* FDBusiness.swift */; };
+		F3B6F0B424C890A8005D3ECE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B324C890A8005D3ECE /* View.swift */; };
 		F3D89BD624C535C9009CE11D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D89BD524C535C9009CE11D /* AppDelegate.swift */; };
 		F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D89BD724C535C9009CE11D /* SceneDelegate.swift */; };
 		F3D89BDD24C535C9009CE11D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D89BDB24C535C9009CE11D /* Main.storyboard */; };
@@ -33,6 +34,11 @@
 		F3E3E11624C692DC0015FA50 /* FDUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E11524C692DC0015FA50 /* FDUser.swift */; };
 		F3E3E11824C7196A0015FA50 /* ForgotPwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E11724C7196A0015FA50 /* ForgotPwdVC.swift */; };
 		F3E3E11B24C7D5650015FA50 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E11A24C7D5650015FA50 /* HomeVC.swift */; };
+		F3E3E11D24C7D9AA0015FA50 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E11C24C7D9AA0015FA50 /* ListVC.swift */; };
+		F3E3E11F24C7D9B60015FA50 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E11E24C7D9B60015FA50 /* CalendarVC.swift */; };
+		F3E3E12124C7D9C40015FA50 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E12024C7D9C40015FA50 /* SearchVC.swift */; };
+		F3E3E12324C874860015FA50 /* ContractCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E12224C874860015FA50 /* ContractCVCell.swift */; };
+		F3E3E12524C87C420015FA50 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E12424C87C420015FA50 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +48,7 @@
 		F38B214624C5998E00B1DA7B /* NavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
 		F38B214924C5A07C00B1DA7B /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F38B214B24C5A37800B1DA7B /* FDBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDBusiness.swift; sourceTree = "<group>"; };
+		F3B6F0B324C890A8005D3ECE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F3D89BD224C535C9009CE11D /* TimeSlot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D89BD524C535C9009CE11D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3D89BD724C535C9009CE11D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +73,11 @@
 		F3E3E11524C692DC0015FA50 /* FDUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDUser.swift; sourceTree = "<group>"; };
 		F3E3E11724C7196A0015FA50 /* ForgotPwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPwdVC.swift; sourceTree = "<group>"; };
 		F3E3E11A24C7D5650015FA50 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		F3E3E11C24C7D9AA0015FA50 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		F3E3E11E24C7D9B60015FA50 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
+		F3E3E12024C7D9C40015FA50 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		F3E3E12224C874860015FA50 /* ContractCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCVCell.swift; sourceTree = "<group>"; };
+		F3E3E12424C87C420015FA50 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +170,9 @@
 				F38B214624C5998E00B1DA7B /* NavVC.swift */,
 				F3E3E11924C7D53F0015FA50 /* Auth */,
 				F3E3E11A24C7D5650015FA50 /* HomeVC.swift */,
+				F3E3E11C24C7D9AA0015FA50 /* ListVC.swift */,
+				F3E3E11E24C7D9B60015FA50 /* CalendarVC.swift */,
+				F3E3E12024C7D9C40015FA50 /* SearchVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -166,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				F3D89BEF24C58277009CE11D /* AuthViewModel.swift */,
+				F3E3E12424C87C420015FA50 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -174,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				F3D89BF624C58639009CE11D /* Colors.swift */,
+				F3B6F0B324C890A8005D3ECE /* View.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -182,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				F3D89BF924C58B46009CE11D /* BorderdView.swift */,
+				F3E3E12224C874860015FA50 /* ContractCVCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3E3E12124C7D9C40015FA50 /* SearchVC.swift in Sources */,
 				F3E3E11424C68FC30015FA50 /* FDUnavailable.swift in Sources */,
 				F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */,
 				F3D89BF024C58277009CE11D /* AuthViewModel.swift in Sources */,
@@ -322,13 +341,18 @@
 				F3E3E10E24C689450015FA50 /* FDPrivateSubmission.swift in Sources */,
 				F3E3E10824C5C7D80015FA50 /* FDGroupContract.swift in Sources */,
 				F3E3E11624C692DC0015FA50 /* FDUser.swift in Sources */,
+				F3E3E12324C874860015FA50 /* ContractCVCell.swift in Sources */,
 				F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */,
 				F3E3E10C24C6611C0015FA50 /* FDGroupSubmission.swift in Sources */,
+				F3B6F0B424C890A8005D3ECE /* View.swift in Sources */,
+				F3E3E11D24C7D9AA0015FA50 /* ListVC.swift in Sources */,
 				F3E3E11024C68A230015FA50 /* FDPersonal.swift in Sources */,
 				F3E3E11824C7196A0015FA50 /* ForgotPwdVC.swift in Sources */,
 				F3D89BD624C535C9009CE11D /* AppDelegate.swift in Sources */,
 				F3E3E11B24C7D5650015FA50 /* HomeVC.swift in Sources */,
 				F3D89BF724C58639009CE11D /* Colors.swift in Sources */,
+				F3E3E11F24C7D9B60015FA50 /* CalendarVC.swift in Sources */,
+				F3E3E12524C87C420015FA50 /* HomeViewModel.swift in Sources */,
 				F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */,
 				F3E3E10624C5BBF30015FA50 /* FDChild.swift in Sources */,
 				F3D89BEB24C58230009CE11D /* LoginVC.swift in Sources */,

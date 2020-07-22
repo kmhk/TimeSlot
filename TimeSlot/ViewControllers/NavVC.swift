@@ -14,7 +14,9 @@ class NavVC: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar.barTintColor = UIColor.tsMainDark
+        UINavigationBar.appearance().barTintColor = UIColor.tsMainDark
+        navigationBar.isTranslucent = false
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -31,4 +33,41 @@ class NavVC: UINavigationController {
     }
     */
 
+}
+
+
+// MARK: -
+extension UINavigationController {
+    func navTitleWithImageAndText(titleText: String) -> UIView {
+        let titleView = UIView()
+        
+        let label = UILabel()
+        label.text = titleText
+        //label.sizeToFit()
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 36)
+        label.textColor = .white
+        label.center = titleView.center
+        label.textAlignment = .center
+        
+        let image = UIImageView()
+        image.image = UIImage(named: "imgLogo")
+        
+        let imageAspect = image.image!.size.width / image.image!.size.height
+        
+        let imageX = label.frame.origin.x - label.frame.size.height * imageAspect - 5
+        let imageY = label.frame.origin.y
+        
+        let imageW = label.frame.size.height * imageAspect
+        let imageH = label.frame.size.height
+        
+        image.frame = CGRect(x: imageX, y: imageY, width: imageW, height: imageH)
+        image.contentMode = .scaleAspectFit
+        
+        titleView.addSubview(label)
+        titleView.addSubview(image)
+        
+        titleView.sizeToFit()
+        
+        return titleView
+    }
 }

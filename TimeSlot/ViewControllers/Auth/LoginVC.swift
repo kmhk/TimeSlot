@@ -64,17 +64,23 @@ class LoginVC: UIViewController {
     @IBAction func btnDoneTapped(_ sender: Any) {
         guard txtUser.text != "" && txtPwd.text != "" else { return }
         
+        let showMsg: (String)->() = { msg in
+            let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         ProgressHUD.fontStatus = .boldSystemFont(ofSize: 17.0)
         ProgressHUD.show("Loading ...")
         
         Backend.loginUser(email: txtUser.text!, pwd: txtPwd.text!) { (error) in
             ProgressHUD.dismiss()
             guard error == nil else {
-                print("\(error!.localizedDescription)")
+                showMsg(error!.localizedDescription)
                 return
             }
             
-            print("logged in successfully")
+            self.performSegue(withIdentifier: "segueNext", sender: nil)
         }
     }
     

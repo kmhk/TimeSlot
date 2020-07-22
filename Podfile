@@ -9,5 +9,6 @@ target 'TimeSlot' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'ProgressHUD'
+  pod 'SDWebImage'
 
 end
