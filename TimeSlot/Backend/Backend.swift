@@ -171,6 +171,17 @@ class Backend: NSObject {
     }
     
     
+    static func getBusiness(_ id: String) -> FDBusiness? {
+        for item in shared().businesses {
+            if item.uid == id {
+                return item
+            }
+        }
+        
+        return nil
+    }
+    
+    
     static func loadChilds(finished: FDFinishedHandler!) {
         childRef.observeSingleEvent(of: .value) { (snap) in
             var childs = [FDChild]()
@@ -198,6 +209,17 @@ class Backend: NSObject {
             shared().users = users
             finished(nil)
         }
+    }
+    
+    
+    static func getUser(_ id: String) -> FDPersonal? {
+        for item in shared().personals {
+            if item.uid == id {
+                return item
+            }
+        }
+        
+        return nil
     }
     
     

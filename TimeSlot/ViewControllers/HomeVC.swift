@@ -19,6 +19,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var lblPhone: UILabel!
     @IBOutlet weak var segmentType: UISegmentedControl!
+    @IBOutlet weak var btnCreate: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     let viewModel = HomeViewModel()
@@ -28,27 +29,10 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        imgViewAvatar.layer.cornerRadius = imgViewAvatar.frame.width / 2
-        imgViewAvatar.clipsToBounds = true
-        imgViewAvatar.layer.borderWidth = 3
-        imgViewAvatar.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
-        
-        btnUploadAvatar.backgroundColor = UIColor.tsAccent
-        btnUploadAvatar.layer.cornerRadius = btnUploadAvatar.frame.width / 2
-        btnUploadAvatar.clipsToBounds = true
-        btnUploadAvatar.layer.borderWidth = 1
-        btnUploadAvatar.layer.borderColor = UIColor.white.cgColor
-        
-        btnEditProfile.layer.cornerRadius = btnUploadAvatar.frame.height / 2
-        btnEditProfile.clipsToBounds = true
-        btnEditProfile.layer.borderWidth = 1
-        btnEditProfile.layer.borderColor = UIColor.white.cgColor
-        
-        segmentType.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue], for: .selected)
-        segmentType.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
-        
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        setupUI()
     }
     
     
@@ -82,7 +66,40 @@ class HomeVC: UIViewController {
         print("log out")
     }
     
+    
+    @IBAction func changedSegmentValue(_ sender: Any) {
+        collectionView.reloadData()
+    }
+    
+    
     // MARK: private method
+    private func setupUI() {
+        imgViewAvatar.layer.cornerRadius = imgViewAvatar.frame.width / 2
+        imgViewAvatar.clipsToBounds = true
+        imgViewAvatar.layer.borderWidth = 3
+        imgViewAvatar.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
+        
+        btnUploadAvatar.backgroundColor = UIColor.tsAccent
+        btnUploadAvatar.layer.cornerRadius = btnUploadAvatar.frame.width / 2
+        btnUploadAvatar.clipsToBounds = true
+        btnUploadAvatar.layer.borderWidth = 1
+        btnUploadAvatar.layer.borderColor = UIColor.white.cgColor
+        
+        btnEditProfile.layer.cornerRadius = btnUploadAvatar.frame.height / 2
+        btnEditProfile.clipsToBounds = true
+        btnEditProfile.layer.borderWidth = 1
+        btnEditProfile.layer.borderColor = UIColor.white.cgColor
+        
+        btnCreate.layer.cornerRadius = btnUploadAvatar.frame.height / 2
+        btnCreate.clipsToBounds = true
+        btnCreate.layer.borderWidth = 1
+        btnCreate.layer.borderColor = UIColor.black.cgColor
+        
+        segmentType.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.tsMainBlue!], for: .selected)
+        segmentType.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+    }
+    
+    
     private func updateInfo() {
         guard let man = Backend.shared().user else { return }
         
@@ -96,7 +113,8 @@ class HomeVC: UIViewController {
             lblPhone.text = user.phoneNumber
             imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             
-            viewModel.getMyContracts()
+            viewModel.getContracts(id: Backend.shared().user!.uid)
+            viewModel.getUnavailables(id: Backend.shared().user!.uid)
             
         } else {
             segmentType.setTitle("CHILDREN", forSegmentAt: 1)
@@ -108,7 +126,8 @@ class HomeVC: UIViewController {
             lblPhone.text = user.phoneNumber
             imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             
-            viewModel.getContractsOfMyCoach()
+            viewModel.getContractsOfCoach(id: Backend.shared().user!.uid)
+            viewModel.getChildrens(id: Backend.shared().user!.uid)
         }
         
         collectionView.reloadData()
@@ -119,7 +138,12 @@ class HomeVC: UIViewController {
 // MARK: -
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.myContracts.count
+        if segmentType.selectedSegmentIndex == 0 { // CONTRACTS
+            return viewModel.myContracts.count
+            
+        } else {
+            return viewModel.mySubs.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -134,7 +158,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                 cell.lblPeoples.text = "1"
                 cell.lblRate.text = String(format: "$ %.2f/HR", item.hourlyRate)
                 
-                if let coach = viewModel.getBusiness(item.businessId) {
+                if let coach = Backend.getBusiness(item.businessId) {
                     cell.imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                     cell.lblOwner.text = coach.username
                 }
@@ -145,7 +169,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                 cell.lblPeoples.text = "2 ~ \(item.maxPlayers)"
                 cell.lblRate.text = String(format: "$ %.2f/HR", item.hourlyRate)
                 
-                if let coach = viewModel.getBusiness(item.businessId) {
+                if let coach = Backend.getBusiness(item.businessId) {
                     cell.imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                     cell.lblOwner.text = coach.username
                 }
@@ -154,14 +178,31 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
             return cell
             
         } else { // UNAVAILBLE or CHILDREN
-            
+            if Backend.shared().user!.type == UserType.coach.rawValue { // UNAVAILBLE
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UnavailableCVCell", for: indexPath) as! UnavailableCVCell
+                
+                let item = viewModel.mySubs[indexPath.row]
+                cell.showData(item as! FDUnavailable)
+                
+                return cell
+                
+            } else { // CHILDREN
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildrenCVCell", for: indexPath) as! ChildrenCVCell
+                
+                let item = viewModel.mySubs[indexPath.row]
+                cell.showInfo(item as! FDChild)
+                
+                return cell
+            }
         }
-        
-        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 20, height: 150)
+        if segmentType.selectedSegmentIndex == 0 { // CONTRACTS
+            return CGSize(width: collectionView.frame.width - 20, height: 150)
+        } else {
+            return CGSize(width: collectionView.frame.width - 20, height: 95)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

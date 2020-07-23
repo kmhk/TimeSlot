@@ -27,7 +27,7 @@ class ContractCVCell: UICollectionViewCell {
         layer.borderColor = UIColor.tsMain!.cgColor
         
         imgViewAvatar.layer.cornerRadius = imgViewAvatar.frame.width / 2
-        imgViewAvatar.layer.borderColor = UIColor.systemBlue.cgColor
+        imgViewAvatar.layer.borderColor = UIColor.tsMainBlue!.cgColor
         imgViewAvatar.layer.borderWidth = 1.0
         imgViewAvatar.clipsToBounds = true
         

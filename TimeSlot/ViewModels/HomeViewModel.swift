@@ -10,18 +10,19 @@ import UIKit
 
 class HomeViewModel: NSObject {
     var myContracts = [Any]()
+    var mySubs = [Any]()
     
-    func getMyContracts() {
+    func getContracts(id: String) {
         var list = [Any]()
         
         for item in Backend.shared().privateContracts {
-            if item.businessId == Backend.shared().user!.uid {
+            if item.businessId == id {
                 list.append(item)
             }
         }
         
         for item in Backend.shared().groupContracts {
-            if item.businessId == Backend.shared().user!.uid {
+            if item.businessId == id {
                 list.append(item)
             }
         }
@@ -30,17 +31,17 @@ class HomeViewModel: NSObject {
     }
     
     
-    func getContractsOfMyCoach() {
+    func getContractsOfCoach(id: String) {
         var list = [Any]()
         
         for item in Backend.shared().privateContracts {
-            if let coach = getBusiness(item.businessId), coach.followers.contains(Backend.shared().user!.uid) == true {
+            if let coach = Backend.getBusiness(item.businessId), coach.followers.contains(id) == true {
                 list.append(item)
             }
         }
         
         for item in Backend.shared().groupContracts {
-            if let coach = getBusiness(item.businessId), coach.followers.contains(Backend.shared().user!.uid) == true {
+            if let coach = Backend.getBusiness(item.businessId), coach.followers.contains(id) == true {
                 list.append(item)
             }
         }
@@ -49,14 +50,28 @@ class HomeViewModel: NSObject {
     }
     
     
-    func getBusiness(_ id: String) -> FDBusiness? {
-        for item in Backend.shared().businesses {
-            if item.uid == id {
-                return item
+    func getUnavailables(id: String) {
+        var list = [Any]()
+        
+        for item in Backend.shared().unavailables {
+            if item.businessId == id {
+                list.append(item)
             }
         }
         
-        return nil
+        mySubs = list
     }
     
+    
+    func getChildrens(id: String) {
+        var list = [Any]()
+        
+        for item in Backend.shared().childs {
+            if item.parent == id {
+                list.append(item)
+            }
+        }
+        
+        mySubs = list
+    }
 }

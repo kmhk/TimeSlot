@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		B4D397E4789231947C02D0AE /* Pods_TimeSlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 576E71B8ECAB05ED0D6A3C62 /* Pods_TimeSlot.framework */; };
+		F35F766624C931CE00FEEC30 /* ListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766524C931CE00FEEC30 /* ListTVCell.swift */; };
+		F35F766824C933FF00FEEC30 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766724C933FF00FEEC30 /* Extensions.swift */; };
+		F35F766A24C93BF600FEEC30 /* UserCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766924C93BF600FEEC30 /* UserCVCell.swift */; };
+		F35F766C24C93D7F00FEEC30 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */; };
 		F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214624C5998E00B1DA7B /* NavVC.swift */; };
 		F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214924C5A07C00B1DA7B /* Backend.swift */; };
 		F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214B24C5A37800B1DA7B /* FDBusiness.swift */; };
-		F3B6F0B424C890A8005D3ECE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B324C890A8005D3ECE /* View.swift */; };
+		F3B6F0B624C9068E005D3ECE /* UnavailableCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */; };
+		F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */; };
+		F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */; };
 		F3D89BD624C535C9009CE11D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D89BD524C535C9009CE11D /* AppDelegate.swift */; };
 		F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D89BD724C535C9009CE11D /* SceneDelegate.swift */; };
 		F3D89BDD24C535C9009CE11D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D89BDB24C535C9009CE11D /* Main.storyboard */; };
@@ -45,10 +51,16 @@
 		576E71B8ECAB05ED0D6A3C62 /* Pods_TimeSlot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeSlot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AA0872BB367CF7AC9B4958 /* Pods-TimeSlot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeSlot.debug.xcconfig"; path = "Target Support Files/Pods-TimeSlot/Pods-TimeSlot.debug.xcconfig"; sourceTree = "<group>"; };
 		B7D011AD85BAE0F8EF999A41 /* Pods-TimeSlot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeSlot.release.xcconfig"; path = "Target Support Files/Pods-TimeSlot/Pods-TimeSlot.release.xcconfig"; sourceTree = "<group>"; };
+		F35F766524C931CE00FEEC30 /* ListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTVCell.swift; sourceTree = "<group>"; };
+		F35F766724C933FF00FEEC30 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F35F766924C93BF600FEEC30 /* UserCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCVCell.swift; sourceTree = "<group>"; };
+		F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		F38B214624C5998E00B1DA7B /* NavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
 		F38B214924C5A07C00B1DA7B /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F38B214B24C5A37800B1DA7B /* FDBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDBusiness.swift; sourceTree = "<group>"; };
-		F3B6F0B324C890A8005D3ECE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableCVCell.swift; sourceTree = "<group>"; };
+		F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenCVCell.swift; sourceTree = "<group>"; };
+		F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		F3D89BD224C535C9009CE11D /* TimeSlot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D89BD524C535C9009CE11D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3D89BD724C535C9009CE11D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +194,8 @@
 			children = (
 				F3D89BEF24C58277009CE11D /* AuthViewModel.swift */,
 				F3E3E12424C87C420015FA50 /* HomeViewModel.swift */,
+				F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */,
+				F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -190,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				F3D89BF624C58639009CE11D /* Colors.swift */,
-				F3B6F0B324C890A8005D3ECE /* View.swift */,
+				F35F766724C933FF00FEEC30 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -200,6 +214,10 @@
 			children = (
 				F3D89BF924C58B46009CE11D /* BorderdView.swift */,
 				F3E3E12224C874860015FA50 /* ContractCVCell.swift */,
+				F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */,
+				F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */,
+				F35F766524C931CE00FEEC30 /* ListTVCell.swift */,
+				F35F766924C93BF600FEEC30 /* UserCVCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,8 +348,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F35F766C24C93D7F00FEEC30 /* SearchViewModel.swift in Sources */,
 				F3E3E12124C7D9C40015FA50 /* SearchVC.swift in Sources */,
+				F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */,
 				F3E3E11424C68FC30015FA50 /* FDUnavailable.swift in Sources */,
+				F35F766A24C93BF600FEEC30 /* UserCVCell.swift in Sources */,
 				F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */,
 				F3D89BF024C58277009CE11D /* AuthViewModel.swift in Sources */,
 				F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */,
@@ -344,7 +365,7 @@
 				F3E3E12324C874860015FA50 /* ContractCVCell.swift in Sources */,
 				F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */,
 				F3E3E10C24C6611C0015FA50 /* FDGroupSubmission.swift in Sources */,
-				F3B6F0B424C890A8005D3ECE /* View.swift in Sources */,
+				F3B6F0B624C9068E005D3ECE /* UnavailableCVCell.swift in Sources */,
 				F3E3E11D24C7D9AA0015FA50 /* ListVC.swift in Sources */,
 				F3E3E11024C68A230015FA50 /* FDPersonal.swift in Sources */,
 				F3E3E11824C7196A0015FA50 /* ForgotPwdVC.swift in Sources */,
@@ -356,7 +377,10 @@
 				F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */,
 				F3E3E10624C5BBF30015FA50 /* FDChild.swift in Sources */,
 				F3D89BEB24C58230009CE11D /* LoginVC.swift in Sources */,
+				F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */,
+				F35F766824C933FF00FEEC30 /* Extensions.swift in Sources */,
 				F3E3E10A24C5C9D00015FA50 /* FDPrivateContract.swift in Sources */,
+				F35F766624C931CE00FEEC30 /* ListTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

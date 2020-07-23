@@ -1,5 +1,5 @@
 //
-//  View.swift
+//  Extensions.swift
 //  TimeSlot
 //
 //  Created by com on 7/22/20.
@@ -8,13 +8,23 @@
 
 import UIKit
 
+extension Calendar {
+    static let gregorian = Calendar(identifier: .gregorian)
+}
+
+extension Date {
+    var startOfWeek: Date? {
+        return Calendar.gregorian.date(from: Calendar.gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+    }
+}
+
 extension UIView {
     func roundGradientView() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.startPoint = .init(x: 0, y: 0)
         gradientLayer.endPoint = .init(x: 1, y: 0)
-        gradientLayer.colors = [UIColor.tsMainDark!.cgColor, UIColor.systemBlue.cgColor]
+        gradientLayer.colors = [UIColor.tsMainDark!.cgColor, UIColor.tsMainBlue!.cgColor]
         gradientLayer.cornerRadius = frame.width / 5
         layer.insertSublayer(gradientLayer, at: 0)
         
@@ -30,7 +40,7 @@ extension UIView {
         gradientLayer.frame = bounds
         gradientLayer.startPoint = .init(x: 0, y: 0)
         gradientLayer.endPoint = .init(x: 1, y: 0)
-        gradientLayer.colors = [UIColor.tsMainDark!.cgColor, UIColor.systemBlue.cgColor]
+        gradientLayer.colors = [UIColor.tsMainDark!.cgColor, UIColor.tsMainBlue!.cgColor]
         layer.insertSublayer(gradientLayer, at: 0)
         
         layer.shadowOffset = CGSize(width: 0, height: 2)

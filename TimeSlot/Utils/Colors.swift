@@ -16,6 +16,7 @@ extension UIColor {
     static let tsRedLight = UIColor(hex: "#ce080e")
     static let tsAccent = UIColor(hex: "#F86F5F")
     static let tsAccentLight = UIColor(hex: "#AAF86F5F")
+    static let tsMainBlue = UIColor(hex: "#7B63FC")
     
     
     public convenience init?(hex: String) {
