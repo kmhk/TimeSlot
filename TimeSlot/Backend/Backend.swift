@@ -171,6 +171,13 @@ class Backend: NSObject {
     }
     
     
+    static func saveBusiness(business: FDBusiness, finished: FDFinishedHandler!) {
+        providerRef.child(business.uid).setValue(business.FDdata()) { (error, ref) in
+            finished(error)
+        }
+    }
+    
+    
     static func getBusiness(_ id: String) -> FDBusiness? {
         for item in shared().businesses {
             if item.uid == id {
@@ -194,6 +201,17 @@ class Backend: NSObject {
             shared().childs = childs
             finished(nil)
         }
+    }
+    
+    
+    static func getChild(_ id: String) -> FDChild? {
+        for item in shared().childs {
+            if item.uid == id {
+                return item
+            }
+        }
+        
+        return nil
     }
     
     
@@ -243,6 +261,17 @@ class Backend: NSObject {
     }
     
     
+    static func findPrivateContract(_ id: String) -> FDPrivateContract? {
+        for item in shared().privateContracts {
+            if item.id == id {
+                return item
+            }
+        }
+        
+        return nil
+    }
+    
+    
     static func loadPrivateContract(finished: FDFinishedHandler!) {
         privateContractRef.observeSingleEvent(of: .value) { (snap) in
             var list = [FDPrivateContract]()
@@ -255,6 +284,17 @@ class Backend: NSObject {
             shared().privateContracts = list
             finished(nil)
         }
+    }
+    
+    
+    static func findGroupContract(_ id: String) -> FDGroupContract? {
+        for item in shared().groupContracts {
+            if item.id == id {
+                return item
+            }
+        }
+        
+        return nil
     }
     
     
@@ -290,6 +330,19 @@ class Backend: NSObject {
             shared().privateSubmissions = list
             finished(nil)
         }
+    }
+    
+    
+    static func getPersonIDofGroupSubmission(groupSubmission: FDGroupSubmission, person: FDPersonal) -> String? {
+        guard groupSubmission.users.contains(person.uid) == false else { return person.uid }
+        
+        for item in person.childIds {
+            if groupSubmission.users.contains(item) {
+                return item
+            }
+        }
+        
+        return nil
     }
     
     

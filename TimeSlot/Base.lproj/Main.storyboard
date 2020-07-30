@@ -571,6 +571,35 @@
             </objects>
             <point key="canvasLocation" x="1405.5999999999999" y="1710.5911330049262"/>
         </scene>
+        <!--List DetailVC-->
+        <scene sceneID="yq2-Jp-RPP">
+            <objects>
+                <viewController id="EX3-uU-goq" customClass="ListDetailVC" customModule="TimeSlot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jcz-cZ-HIm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3XH-se-sMW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EX3-uU-goq" id="iwa-jk-y7e"/>
+                                    <outlet property="delegate" destination="EX3-uU-goq" id="Qbv-tW-o2W"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="RMI-7i-lMv"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="3XH-se-sMW" id="2bo-rI-Bia"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEu-Kl-66M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1405.5999999999999" y="2420.6896551724139"/>
+        </scene>
         <!--CalendarVC-->
         <scene sceneID="8TO-0B-bbg">
             <objects>

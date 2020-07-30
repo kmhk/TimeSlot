@@ -115,7 +115,4 @@ class FDGroupSubmission: NSObject {
         return .pending
     }
     
-    
-    
-    
 }

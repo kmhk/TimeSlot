@@ -34,4 +34,64 @@ class SearchViewModel: NSObject {
         
         users = list
     }
+    
+    
+    func addFollowerTo(coachID: String, personID: String, finished: FDFinishedHandler!) {
+        for i in 0..<Backend.shared().businesses.count {
+            if Backend.shared().businesses[i].uid == coachID {
+                if !Backend.shared().businesses[i].followers.contains(personID) {
+                    Backend.shared().businesses[i].followers.append(personID)
+                }
+
+                if Backend.shared().businesses[i].pendingIDs.contains(personID) {
+                    Backend.shared().businesses[i].pendingIDs.removeAll {$0 == personID}
+                }
+
+                if Backend.shared().businesses[i].uid == Backend.shared().business!.uid {
+                    Backend.shared().business = Backend.shared().businesses[i]
+                }
+
+                Backend.saveBusiness(business: Backend.shared().businesses[i], finished: finished)
+                return
+            }
+        }
+        
+        finished(nil)
+    }
+    
+    
+    func requestFollowerTo(coachID: String, personID: String, finished: FDFinishedHandler!) {
+        for i in 0..<Backend.shared().businesses.count {
+            if Backend.shared().businesses[i].uid == coachID {
+                if !Backend.shared().businesses[i].pendingIDs.contains(personID) {
+                    Backend.shared().businesses[i].pendingIDs.append(personID)
+                }
+                
+                Backend.saveBusiness(business: Backend.shared().businesses[i], finished: finished)
+                return
+            }
+        }
+        
+        finished(nil)
+    }
+    
+    
+    func cancelRequestFollowFrom(coachID: String, personID: String, finished: FDFinishedHandler!) {
+        for i in 0..<Backend.shared().businesses.count {
+            if Backend.shared().businesses[i].uid == coachID {
+                if Backend.shared().businesses[i].followers.contains(personID) {
+                    Backend.shared().businesses[i].followers.removeAll {$0 == personID}
+                }
+                
+                if Backend.shared().businesses[i].pendingIDs.contains(personID) {
+                    Backend.shared().businesses[i].pendingIDs.removeAll {$0 == personID}
+                }
+                
+                Backend.saveBusiness(business: Backend.shared().businesses[i], finished: finished)
+                return
+            }
+        }
+        
+        finished(nil)
+    }
 }

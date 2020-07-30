@@ -52,17 +52,48 @@ class UserCVCell: UICollectionViewCell {
     
     
     func showInfo(_ data: Any) {
+        btnAdd.isHidden = true
+        btnWaiting.isHidden = true
+        btnAccept.isHidden = true
+        btnClose.isHidden = true
+        
         if let item = data as? FDBusiness {
             imgPin.image = UIImage(systemName: "hand.thumbsup")
             lblLocation.text = item.service
             imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: item.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblName.text = item.username
             
+            if item.followers.contains(Backend.shared().user!.uid) {
+                btnClose.isHidden = false
+                btnClose.frame = CGRect(x: frame.width - 40, y: 17, width: 30, height: 30)
+                
+            } else if item.pendingIDs.contains(Backend.shared().user!.uid) {
+                btnWaiting.isHidden = false
+                btnWaiting.frame = CGRect(x: frame.width - 40, y: 17, width: 30, height: 30)
+                
+            } else {
+                btnAdd.isHidden = false
+                btnAdd.frame = CGRect(x: frame.width - 40, y: 17, width: 30, height: 30)
+            }
+            
         } else if let item = data as? FDPersonal {
             imgPin.image = UIImage(systemName: "mappin.and.ellipse")
             lblLocation.text = item.location
             imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: item.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblName.text = item.username
+            
+            let me = Backend.shared().business!
+            if me.followers.contains(item.uid) {
+                btnClose.isHidden = false
+                btnClose.frame = CGRect(x: frame.width - 40, y: 17, width: 30, height: 30)
+                
+            } else if me.pendingIDs.contains(item.uid) {
+                btnClose.isHidden = false
+                btnClose.frame = CGRect(x: frame.width - 40, y: 17, width: 30, height: 30)
+                
+                btnAccept.isHidden = false
+                btnAccept.frame = CGRect(x: frame.width - 80, y: 17, width: 30, height: 30)
+            }
         }
     }
 }

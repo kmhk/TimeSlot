@@ -10,5 +10,6 @@ target 'TimeSlot' do
   pod 'Firebase/Database'
   pod 'ProgressHUD'
   pod 'SDWebImage'
+  pod 'JZCalendarWeekView'
 
 end

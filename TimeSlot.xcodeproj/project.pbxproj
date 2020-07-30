@@ -12,12 +12,17 @@
 		F35F766824C933FF00FEEC30 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766724C933FF00FEEC30 /* Extensions.swift */; };
 		F35F766A24C93BF600FEEC30 /* UserCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766924C93BF600FEEC30 /* UserCVCell.swift */; };
 		F35F766C24C93D7F00FEEC30 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */; };
+		F35F766E24CFBA4F00FEEC30 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35F766D24CFBA4F00FEEC30 /* CalendarViewModel.swift */; };
+		F376733A24D1221B004A0E73 /* CalendarCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376733824D1221B004A0E73 /* CalendarCVCell.swift */; };
+		F376733B24D1221B004A0E73 /* CalendarCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F376733924D1221B004A0E73 /* CalendarCVCell.xib */; };
+		F376733D24D125B3004A0E73 /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376733C24D125B3004A0E73 /* CalendarCollectionView.swift */; };
 		F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214624C5998E00B1DA7B /* NavVC.swift */; };
 		F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214924C5A07C00B1DA7B /* Backend.swift */; };
 		F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214B24C5A37800B1DA7B /* FDBusiness.swift */; };
 		F3B6F0B624C9068E005D3ECE /* UnavailableCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */; };
 		F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */; };
 		F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */; };
+		F3D2610824D253FC00CE73F1 /* ListDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D2610724D253FC00CE73F1 /* ListDetailVC.swift */; };
 		F3D89BD624C535C9009CE11D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D89BD524C535C9009CE11D /* AppDelegate.swift */; };
 		F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D89BD724C535C9009CE11D /* SceneDelegate.swift */; };
 		F3D89BDD24C535C9009CE11D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D89BDB24C535C9009CE11D /* Main.storyboard */; };
@@ -55,12 +60,17 @@
 		F35F766724C933FF00FEEC30 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F35F766924C93BF600FEEC30 /* UserCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCVCell.swift; sourceTree = "<group>"; };
 		F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		F35F766D24CFBA4F00FEEC30 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		F376733824D1221B004A0E73 /* CalendarCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCVCell.swift; sourceTree = "<group>"; };
+		F376733924D1221B004A0E73 /* CalendarCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCVCell.xib; sourceTree = "<group>"; };
+		F376733C24D125B3004A0E73 /* CalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
 		F38B214624C5998E00B1DA7B /* NavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
 		F38B214924C5A07C00B1DA7B /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F38B214B24C5A37800B1DA7B /* FDBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDBusiness.swift; sourceTree = "<group>"; };
 		F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableCVCell.swift; sourceTree = "<group>"; };
 		F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenCVCell.swift; sourceTree = "<group>"; };
 		F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		F3D2610724D253FC00CE73F1 /* ListDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailVC.swift; sourceTree = "<group>"; };
 		F3D89BD224C535C9009CE11D /* TimeSlot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSlot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D89BD524C535C9009CE11D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3D89BD724C535C9009CE11D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +195,7 @@
 				F3E3E11C24C7D9AA0015FA50 /* ListVC.swift */,
 				F3E3E11E24C7D9B60015FA50 /* CalendarVC.swift */,
 				F3E3E12024C7D9C40015FA50 /* SearchVC.swift */,
+				F3D2610724D253FC00CE73F1 /* ListDetailVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -196,6 +207,7 @@
 				F3E3E12424C87C420015FA50 /* HomeViewModel.swift */,
 				F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */,
 				F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */,
+				F35F766D24CFBA4F00FEEC30 /* CalendarViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -218,6 +230,9 @@
 				F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */,
 				F35F766524C931CE00FEEC30 /* ListTVCell.swift */,
 				F35F766924C93BF600FEEC30 /* UserCVCell.swift */,
+				F376733C24D125B3004A0E73 /* CalendarCollectionView.swift */,
+				F376733824D1221B004A0E73 /* CalendarCVCell.swift */,
+				F376733924D1221B004A0E73 /* CalendarCVCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +311,7 @@
 				F3D89BF224C58352009CE11D /* GoogleService-Info.plist in Resources */,
 				F3D89BDF24C535CB009CE11D /* Assets.xcassets in Resources */,
 				F3D89BDD24C535C9009CE11D /* Main.storyboard in Resources */,
+				F376733B24D1221B004A0E73 /* CalendarCVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +366,9 @@
 			files = (
 				F35F766C24C93D7F00FEEC30 /* SearchViewModel.swift in Sources */,
 				F3E3E12124C7D9C40015FA50 /* SearchVC.swift in Sources */,
+				F376733A24D1221B004A0E73 /* CalendarCVCell.swift in Sources */,
 				F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */,
+				F376733D24D125B3004A0E73 /* CalendarCollectionView.swift in Sources */,
 				F3E3E11424C68FC30015FA50 /* FDUnavailable.swift in Sources */,
 				F35F766A24C93BF600FEEC30 /* UserCVCell.swift in Sources */,
 				F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */,
@@ -374,12 +392,14 @@
 				F3D89BF724C58639009CE11D /* Colors.swift in Sources */,
 				F3E3E11F24C7D9B60015FA50 /* CalendarVC.swift in Sources */,
 				F3E3E12524C87C420015FA50 /* HomeViewModel.swift in Sources */,
+				F35F766E24CFBA4F00FEEC30 /* CalendarViewModel.swift in Sources */,
 				F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */,
 				F3E3E10624C5BBF30015FA50 /* FDChild.swift in Sources */,
 				F3D89BEB24C58230009CE11D /* LoginVC.swift in Sources */,
 				F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */,
 				F35F766824C933FF00FEEC30 /* Extensions.swift in Sources */,
 				F3E3E10A24C5C9D00015FA50 /* FDPrivateContract.swift in Sources */,
+				F3D2610824D253FC00CE73F1 /* ListDetailVC.swift in Sources */,
 				F35F766624C931CE00FEEC30 /* ListTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,7 +553,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TimeSlot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scrimit.TimeSlot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -553,7 +573,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TimeSlot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scrimit.TimeSlot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
