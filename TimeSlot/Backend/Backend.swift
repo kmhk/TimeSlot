@@ -318,6 +318,19 @@ class Backend: NSObject {
     }
     
     
+    static func submitPrivateSubmission(submission: FDPrivateSubmission, finished: FDFinishedHandler!) {
+        guard let uid = privateSubmissionRef.childByAutoId().key else { finished(nil); return }
+        submission.id = uid
+        privateSubmissionRef.child(uid).setValue(submission.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().privateSubmissions.append(submission)
+            }
+            
+            finished(error)
+        }
+    }
+    
+    
     static func loadPrivateSubmission(finished: FDFinishedHandler!) {
         privateSubmissionRef.observeSingleEvent(of: .value) { (snap) in
             var list = [FDPrivateSubmission]()
@@ -343,6 +356,19 @@ class Backend: NSObject {
         }
         
         return nil
+    }
+    
+    
+    static func submitGroupSubmission(submission: FDGroupSubmission, finished: FDFinishedHandler!) {
+        guard let uid = groupSubmissionRef.childByAutoId().key else { finished(nil); return }
+        submission.id = uid
+        groupSubmissionRef.child(uid).setValue(submission.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().groupSubmissions.append(submission)
+            }
+            
+            finished(error)
+        }
     }
     
     

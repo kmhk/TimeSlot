@@ -91,5 +91,9 @@ extension ListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListDetailVC") as! ListDetailVC
+        vc.contract = viewModel.contracts[indexPath.row]
+        self.tabBarController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

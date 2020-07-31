@@ -19,6 +19,11 @@
 		F38B214724C5998E00B1DA7B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214624C5998E00B1DA7B /* NavVC.swift */; };
 		F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214924C5A07C00B1DA7B /* Backend.swift */; };
 		F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38B214B24C5A37800B1DA7B /* FDBusiness.swift */; };
+		F3A3828324D2576800E5294B /* ListDetailContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3828224D2576800E5294B /* ListDetailContractCell.swift */; };
+		F3A3828524D2577B00E5294B /* ListDetailClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3828424D2577B00E5294B /* ListDetailClientCell.swift */; };
+		F3A3828724D2579400E5294B /* ListDetailUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3828624D2579400E5294B /* ListDetailUserCell.swift */; };
+		F3A3828924D27E2900E5294B /* ContractVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3828824D27E2900E5294B /* ContractVC.swift */; };
+		F3A3828B24D3966000E5294B /* ContractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3828A24D3966000E5294B /* ContractViewModel.swift */; };
 		F3B6F0B624C9068E005D3ECE /* UnavailableCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */; };
 		F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */; };
 		F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */; };
@@ -67,6 +72,11 @@
 		F38B214624C5998E00B1DA7B /* NavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
 		F38B214924C5A07C00B1DA7B /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F38B214B24C5A37800B1DA7B /* FDBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDBusiness.swift; sourceTree = "<group>"; };
+		F3A3828224D2576800E5294B /* ListDetailContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailContractCell.swift; sourceTree = "<group>"; };
+		F3A3828424D2577B00E5294B /* ListDetailClientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailClientCell.swift; sourceTree = "<group>"; };
+		F3A3828624D2579400E5294B /* ListDetailUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailUserCell.swift; sourceTree = "<group>"; };
+		F3A3828824D27E2900E5294B /* ContractVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractVC.swift; sourceTree = "<group>"; };
+		F3A3828A24D3966000E5294B /* ContractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractViewModel.swift; sourceTree = "<group>"; };
 		F3B6F0B524C9068E005D3ECE /* UnavailableCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableCVCell.swift; sourceTree = "<group>"; };
 		F3B6F0B724C91619005D3ECE /* ChildrenCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenCVCell.swift; sourceTree = "<group>"; };
 		F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -196,6 +206,7 @@
 				F3E3E11E24C7D9B60015FA50 /* CalendarVC.swift */,
 				F3E3E12024C7D9C40015FA50 /* SearchVC.swift */,
 				F3D2610724D253FC00CE73F1 /* ListDetailVC.swift */,
+				F3A3828824D27E2900E5294B /* ContractVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -208,6 +219,7 @@
 				F3B6F0BB24C92C46005D3ECE /* ListViewModel.swift */,
 				F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */,
 				F35F766D24CFBA4F00FEEC30 /* CalendarViewModel.swift */,
+				F3A3828A24D3966000E5294B /* ContractViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -233,6 +245,9 @@
 				F376733C24D125B3004A0E73 /* CalendarCollectionView.swift */,
 				F376733824D1221B004A0E73 /* CalendarCVCell.swift */,
 				F376733924D1221B004A0E73 /* CalendarCVCell.xib */,
+				F3A3828224D2576800E5294B /* ListDetailContractCell.swift */,
+				F3A3828424D2577B00E5294B /* ListDetailClientCell.swift */,
+				F3A3828624D2579400E5294B /* ListDetailUserCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -366,6 +381,7 @@
 			files = (
 				F35F766C24C93D7F00FEEC30 /* SearchViewModel.swift in Sources */,
 				F3E3E12124C7D9C40015FA50 /* SearchVC.swift in Sources */,
+				F3A3828B24D3966000E5294B /* ContractViewModel.swift in Sources */,
 				F376733A24D1221B004A0E73 /* CalendarCVCell.swift in Sources */,
 				F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */,
 				F376733D24D125B3004A0E73 /* CalendarCollectionView.swift in Sources */,
@@ -386,15 +402,19 @@
 				F3B6F0B624C9068E005D3ECE /* UnavailableCVCell.swift in Sources */,
 				F3E3E11D24C7D9AA0015FA50 /* ListVC.swift in Sources */,
 				F3E3E11024C68A230015FA50 /* FDPersonal.swift in Sources */,
+				F3A3828324D2576800E5294B /* ListDetailContractCell.swift in Sources */,
 				F3E3E11824C7196A0015FA50 /* ForgotPwdVC.swift in Sources */,
+				F3A3828524D2577B00E5294B /* ListDetailClientCell.swift in Sources */,
 				F3D89BD624C535C9009CE11D /* AppDelegate.swift in Sources */,
 				F3E3E11B24C7D5650015FA50 /* HomeVC.swift in Sources */,
 				F3D89BF724C58639009CE11D /* Colors.swift in Sources */,
 				F3E3E11F24C7D9B60015FA50 /* CalendarVC.swift in Sources */,
 				F3E3E12524C87C420015FA50 /* HomeViewModel.swift in Sources */,
+				F3A3828924D27E2900E5294B /* ContractVC.swift in Sources */,
 				F35F766E24CFBA4F00FEEC30 /* CalendarViewModel.swift in Sources */,
 				F3D89BD824C535C9009CE11D /* SceneDelegate.swift in Sources */,
 				F3E3E10624C5BBF30015FA50 /* FDChild.swift in Sources */,
+				F3A3828724D2579400E5294B /* ListDetailUserCell.swift in Sources */,
 				F3D89BEB24C58230009CE11D /* LoginVC.swift in Sources */,
 				F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */,
 				F35F766824C933FF00FEEC30 /* Extensions.swift in Sources */,

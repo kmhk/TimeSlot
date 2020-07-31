@@ -68,7 +68,15 @@ class HomeVC: UIViewController {
     
     
     @IBAction func changedSegmentValue(_ sender: Any) {
+        btnCreate.isHidden = (segmentType.selectedSegmentIndex == 0)
         collectionView.reloadData()
+    }
+    
+    
+    @objc func btnSignupContract(_ sender: UIButton) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ContractVC") as! ContractVC
+        vc.contract = viewModel.myContracts[sender.tag]
+        self.tabBarController?.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -119,6 +127,8 @@ class HomeVC: UIViewController {
         } else {
             segmentType.setTitle("CHILDREN", forSegmentAt: 1)
             
+            btnCreate.isHidden = (segmentType.selectedSegmentIndex == 0)
+            
             guard let user = Backend.shared().personal else { return }
             lblName.text = user.username
             lblLocation.text = user.location
@@ -151,6 +161,9 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContractCVCell", for: indexPath) as! ContractCVCell
             
             cell.setCellType(Backend.shared().user!.type == UserType.coach.rawValue)
+            
+            cell.btnSignUp.tag = indexPath.row
+            cell.btnSignUp.addTarget(self, action: #selector(btnSignupContract(_:)), for: .touchUpInside)
             
             if let item = viewModel.myContracts[indexPath.row] as? FDPrivateContract {
                 cell.lblTitle.text = item.title
