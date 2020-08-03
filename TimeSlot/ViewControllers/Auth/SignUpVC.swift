@@ -41,25 +41,40 @@ class SignUpVC: UIViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     
-    /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "segueNext" {
+            let vc = segue.destination as! SignUpRoleVC
+            vc.user = sender as? FDUser
+            vc.pwd = txtPwd.text
+        }
     }
-    */
 
     
     // MARK: button action
     
     @IBAction func btnDoneTapped(_ sender: Any) {
+        guard let email = txtEmail.text, let name = txtUser.text, let pwd = txtPwd.text, let pwdConfirm = txtPwdConfirm.text, let phone = txtPhone.text else { return }
+        guard email.count > 0, name.count > 0, pwd.count > 0, phone.count > 0, pwd == pwdConfirm else { return }
+        
+        let user = FDUser([:])
+        user.email = email
+        user.username = name
+        user.phoneNumber = phone
+        
+        self.performSegue(withIdentifier: "segueNext", sender: user)
     }
     
     

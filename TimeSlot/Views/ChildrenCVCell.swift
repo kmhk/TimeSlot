@@ -14,6 +14,7 @@ class ChildrenCVCell: UICollectionViewCell {
     @IBOutlet weak var imgViewAvatar: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblBirthday: UILabel!
+    @IBOutlet weak var btnRemove: UIButton!
     
     
     override func layoutSubviews() {

@@ -30,7 +30,7 @@ class FDGroupContract: NSObject {
         businessId = (dict["businessId"] ?? "") as! String
         length = (dict["length"] ?? 0) as! Int
         maxPlayers = (dict["maxPlayers"] ?? 0) as! Int
-        hourlyRate = (dict["hourlyRate"] ?? 0) as! Double
+        hourlyRate = (dict["hourlyRate"] ?? 0.0) as! Double
     }
     
     func FDdata() -> [String: Any] {

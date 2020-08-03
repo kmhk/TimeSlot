@@ -55,6 +55,13 @@
 		F3E3E12124C7D9C40015FA50 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E12024C7D9C40015FA50 /* SearchVC.swift */; };
 		F3E3E12324C874860015FA50 /* ContractCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E12224C874860015FA50 /* ContractCVCell.swift */; };
 		F3E3E12524C87C420015FA50 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3E12424C87C420015FA50 /* HomeViewModel.swift */; };
+		F3E681A124D7A32D0071FDDD /* AddChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681A024D7A32D0071FDDD /* AddChildVC.swift */; };
+		F3E681A324D7AA620071FDDD /* AddChildViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681A224D7AA620071FDDD /* AddChildViewModel.swift */; };
+		F3E681A524D7B7190071FDDD /* AddContractVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681A424D7B7190071FDDD /* AddContractVC.swift */; };
+		F3E681A724D7EE050071FDDD /* AddContractModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681A624D7EE050071FDDD /* AddContractModel.swift */; };
+		F3E681A924D7FD220071FDDD /* AddScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681A824D7FD220071FDDD /* AddScheduleVC.swift */; };
+		F3E681AB24D8146D0071FDDD /* SignUpRoleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681AA24D8146D0071FDDD /* SignUpRoleVC.swift */; };
+		F3E681AD24D8147E0071FDDD /* SignUpDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681AC24D8147E0071FDDD /* SignUpDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +117,13 @@
 		F3E3E12024C7D9C40015FA50 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F3E3E12224C874860015FA50 /* ContractCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCVCell.swift; sourceTree = "<group>"; };
 		F3E3E12424C87C420015FA50 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F3E681A024D7A32D0071FDDD /* AddChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildVC.swift; sourceTree = "<group>"; };
+		F3E681A224D7AA620071FDDD /* AddChildViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildViewModel.swift; sourceTree = "<group>"; };
+		F3E681A424D7B7190071FDDD /* AddContractVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContractVC.swift; sourceTree = "<group>"; };
+		F3E681A624D7EE050071FDDD /* AddContractModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContractModel.swift; sourceTree = "<group>"; };
+		F3E681A824D7FD220071FDDD /* AddScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleVC.swift; sourceTree = "<group>"; };
+		F3E681AA24D8146D0071FDDD /* SignUpRoleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRoleVC.swift; sourceTree = "<group>"; };
+		F3E681AC24D8147E0071FDDD /* SignUpDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +221,9 @@
 				F3E3E12024C7D9C40015FA50 /* SearchVC.swift */,
 				F3D2610724D253FC00CE73F1 /* ListDetailVC.swift */,
 				F3A3828824D27E2900E5294B /* ContractVC.swift */,
+				F3E681A024D7A32D0071FDDD /* AddChildVC.swift */,
+				F3E681A424D7B7190071FDDD /* AddContractVC.swift */,
+				F3E681A824D7FD220071FDDD /* AddScheduleVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -220,6 +237,8 @@
 				F35F766B24C93D7F00FEEC30 /* SearchViewModel.swift */,
 				F35F766D24CFBA4F00FEEC30 /* CalendarViewModel.swift */,
 				F3A3828A24D3966000E5294B /* ContractViewModel.swift */,
+				F3E681A224D7AA620071FDDD /* AddChildViewModel.swift */,
+				F3E681A624D7EE050071FDDD /* AddContractModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -256,8 +275,10 @@
 			isa = PBXGroup;
 			children = (
 				F3D89BEA24C58230009CE11D /* LoginVC.swift */,
-				F3D89BEC24C58258009CE11D /* SignUpVC.swift */,
 				F3E3E11724C7196A0015FA50 /* ForgotPwdVC.swift */,
+				F3D89BEC24C58258009CE11D /* SignUpVC.swift */,
+				F3E681AA24D8146D0071FDDD /* SignUpRoleVC.swift */,
+				F3E681AC24D8147E0071FDDD /* SignUpDetail.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -384,6 +405,8 @@
 				F3A3828B24D3966000E5294B /* ContractViewModel.swift in Sources */,
 				F376733A24D1221B004A0E73 /* CalendarCVCell.swift in Sources */,
 				F3B6F0B824C91619005D3ECE /* ChildrenCVCell.swift in Sources */,
+				F3E681A724D7EE050071FDDD /* AddContractModel.swift in Sources */,
+				F3E681AD24D8147E0071FDDD /* SignUpDetail.swift in Sources */,
 				F376733D24D125B3004A0E73 /* CalendarCollectionView.swift in Sources */,
 				F3E3E11424C68FC30015FA50 /* FDUnavailable.swift in Sources */,
 				F35F766A24C93BF600FEEC30 /* UserCVCell.swift in Sources */,
@@ -392,18 +415,21 @@
 				F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */,
 				F3D89BFA24C58B46009CE11D /* BorderdView.swift in Sources */,
 				F3E3E11224C68D560015FA50 /* FDSchedule.swift in Sources */,
+				F3E681AB24D8146D0071FDDD /* SignUpRoleVC.swift in Sources */,
 				F3D89BED24C58258009CE11D /* SignUpVC.swift in Sources */,
 				F3E3E10E24C689450015FA50 /* FDPrivateSubmission.swift in Sources */,
 				F3E3E10824C5C7D80015FA50 /* FDGroupContract.swift in Sources */,
 				F3E3E11624C692DC0015FA50 /* FDUser.swift in Sources */,
 				F3E3E12324C874860015FA50 /* ContractCVCell.swift in Sources */,
 				F38B214C24C5A37800B1DA7B /* FDBusiness.swift in Sources */,
+				F3E681A324D7AA620071FDDD /* AddChildViewModel.swift in Sources */,
 				F3E3E10C24C6611C0015FA50 /* FDGroupSubmission.swift in Sources */,
 				F3B6F0B624C9068E005D3ECE /* UnavailableCVCell.swift in Sources */,
 				F3E3E11D24C7D9AA0015FA50 /* ListVC.swift in Sources */,
 				F3E3E11024C68A230015FA50 /* FDPersonal.swift in Sources */,
 				F3A3828324D2576800E5294B /* ListDetailContractCell.swift in Sources */,
 				F3E3E11824C7196A0015FA50 /* ForgotPwdVC.swift in Sources */,
+				F3E681A524D7B7190071FDDD /* AddContractVC.swift in Sources */,
 				F3A3828524D2577B00E5294B /* ListDetailClientCell.swift in Sources */,
 				F3D89BD624C535C9009CE11D /* AppDelegate.swift in Sources */,
 				F3E3E11B24C7D5650015FA50 /* HomeVC.swift in Sources */,
@@ -416,7 +442,9 @@
 				F3E3E10624C5BBF30015FA50 /* FDChild.swift in Sources */,
 				F3A3828724D2579400E5294B /* ListDetailUserCell.swift in Sources */,
 				F3D89BEB24C58230009CE11D /* LoginVC.swift in Sources */,
+				F3E681A924D7FD220071FDDD /* AddScheduleVC.swift in Sources */,
 				F3B6F0BC24C92C46005D3ECE /* ListViewModel.swift in Sources */,
+				F3E681A124D7A32D0071FDDD /* AddChildVC.swift in Sources */,
 				F35F766824C933FF00FEEC30 /* Extensions.swift in Sources */,
 				F3E3E10A24C5C9D00015FA50 /* FDPrivateContract.swift in Sources */,
 				F3D2610824D253FC00CE73F1 /* ListDetailVC.swift in Sources */,

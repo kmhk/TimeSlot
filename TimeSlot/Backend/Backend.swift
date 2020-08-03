@@ -128,6 +128,17 @@ class Backend: NSObject {
     }
     
     
+    static func submitPersonal(user: FDPersonal, finished: FDFinishedHandler!) {
+        adultRef.child(user.uid).setValue(user.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().personals.append(user)
+            }
+            
+            finished(error)
+        }
+    }
+    
+    
     static func loadPersonals(finished: FDFinishedHandler!) {
         adultRef.observeSingleEvent(of: .value) { (snap) in
             var list = [FDPersonal]()
@@ -143,6 +154,17 @@ class Backend: NSObject {
             }
             shared().personals = list
             finished(nil)
+        }
+    }
+    
+    
+    static func submitBusiness(user: FDBusiness, finished: FDFinishedHandler!) {
+        providerRef.child(user.uid).setValue(user.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().businesses.append(user)
+            }
+            
+            finished(error)
         }
     }
     
@@ -189,6 +211,46 @@ class Backend: NSObject {
     }
     
     
+    static func addChild(name: String, birth: Date, finished: FDFinishedHandler!) {
+        guard let uid = childRef.childByAutoId().key else { finished(nil); return }
+        let child = FDChild(uid)
+        child.username = name
+        child.parent = shared().personal!.uid
+        child.birthDay = birth
+        
+        shared().personal!.childIds.append(uid)
+        
+        childRef.child(uid).setValue(child.FDdata()) { (error, ref) in
+            guard error == nil else {
+                finished(error)
+                return
+            }
+            
+            adultRef.child(shared().personal!.uid).setValue(shared().personal!.FDdata()) { (error, ref) in
+                shared().childs.append(child)
+                finished(error)
+            }
+        }
+    }
+    
+    
+    static func removeChild(child: FDChild, finished: FDFinishedHandler!) {
+        shared().personal!.childIds.removeAll {$0 == child.uid}
+        
+        adultRef.child(shared().personal!.uid).setValue(shared().personal!.FDdata()) { (error, ref) in
+            if error != nil {
+                finished(error)
+                return
+            }
+            
+            childRef.child(child.uid).setValue(nil) { (error, ref) in
+                shared().childs.removeAll {$0.uid == child.uid}
+                finished(error)
+            }
+        }
+    }
+    
+    
     static func loadChilds(finished: FDFinishedHandler!) {
         childRef.observeSingleEvent(of: .value) { (snap) in
             var childs = [FDChild]()
@@ -212,6 +274,22 @@ class Backend: NSObject {
         }
         
         return nil
+    }
+    
+    
+    static func submitUser(user: FDUser, pwd: String, finished: FDFinishedHandler!) {
+        Auth.auth().createUser(withEmail: user.email, password: pwd) { (auth, error) in
+            guard error == nil, auth != nil else { finished(error); return }
+            
+            user.uid = auth!.user.uid
+            userRef.child(user.uid).setValue(user.FDdata()) { (error, ref) in
+                if error == nil {
+                    shared().users.append(user)
+                }
+                
+                finished(error)
+            }
+        }
     }
     
     
@@ -272,6 +350,18 @@ class Backend: NSObject {
     }
     
     
+    static func submitPrivateContract(contract: FDPrivateContract, finished: FDFinishedHandler!) {
+        guard let uid = privateContractRef.childByAutoId().key else { finished(nil); return }
+        contract.id = uid
+        privateContractRef.child(uid).setValue(contract.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().privateContracts.append(contract)
+            }
+            finished(error)
+        }
+    }
+    
+    
     static func loadPrivateContract(finished: FDFinishedHandler!) {
         privateContractRef.observeSingleEvent(of: .value) { (snap) in
             var list = [FDPrivateContract]()
@@ -295,6 +385,18 @@ class Backend: NSObject {
         }
         
         return nil
+    }
+    
+    
+    static func submitGroupContract(contract: FDGroupContract, finished: FDFinishedHandler!) {
+        guard let uid = groupContractRef.childByAutoId().key else { finished(nil); return }
+        contract.id = uid
+        groupContractRef.child(uid).setValue(contract.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().groupContracts.append(contract)
+            }
+            finished(error)
+        }
     }
     
     
@@ -388,6 +490,19 @@ class Backend: NSObject {
             }
             
             finished(nil)
+        }
+    }
+    
+    
+    static func submitUnavailable(_ submission: FDUnavailable, finished: FDFinishedHandler!) {
+        guard let uid = unavilableRef.childByAutoId().key else { finished(nil); return }
+        submission.id = uid
+        unavilableRef.child(uid).setValue(submission.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().unavailables.append(submission)
+            }
+            
+            finished(error)
         }
     }
     

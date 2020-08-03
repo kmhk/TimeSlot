@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import ProgressHUD
 
 class HomeVC: UIViewController {
 
@@ -64,11 +65,12 @@ class HomeVC: UIViewController {
     // MARK: button action
     @objc func btnLogoutTapped(_ sender: Any) {
         print("log out")
+        tabBarController?.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func changedSegmentValue(_ sender: Any) {
-        btnCreate.isHidden = (segmentType.selectedSegmentIndex == 0)
+        btnCreate.isHidden = (segmentType.selectedSegmentIndex == 0 && Backend.shared().user!.type == UserType.personal.rawValue)
         collectionView.reloadData()
     }
     
@@ -79,6 +81,41 @@ class HomeVC: UIViewController {
         self.tabBarController?.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func btnCreateTapped(_ sender: Any) {
+        if let user = Backend.shared().user, user.type == UserType.coach.rawValue {
+            if segmentType.selectedSegmentIndex == 0 {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "AddContractVC") as! AddContractVC
+                self.tabBarController?.navigationController?.pushViewController(vc, animated: true)
+                
+            } else {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "AddScheduleVC") as! AddScheduleVC
+                self.tabBarController?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        } else if let user = Backend.shared().user, user.type == UserType.personal.rawValue {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "AddChildVC") as! AddChildVC
+            self.tabBarController?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    @objc func btnRemoveChildTapped(_ sender: UIButton) {
+        let index = sender.tag
+        let child = viewModel.mySubs[index] as! FDChild
+        
+        ProgressHUD.show()
+        viewModel.removeChildren(child: child) { (error) in
+            ProgressHUD.dismiss()
+            
+            guard error == nil else {
+                let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            self.collectionView.reloadData()
+        }
+    }
     
     // MARK: private method
     private func setupUI() {
@@ -111,6 +148,8 @@ class HomeVC: UIViewController {
     private func updateInfo() {
         guard let man = Backend.shared().user else { return }
         
+        btnCreate.isHidden = (segmentType.selectedSegmentIndex == 0 && Backend.shared().user!.type == UserType.personal.rawValue)
+        
         if man.type == UserType.coach.rawValue {
             segmentType.setTitle("UNAVAILABLE", forSegmentAt: 1)
             
@@ -126,8 +165,6 @@ class HomeVC: UIViewController {
             
         } else {
             segmentType.setTitle("CHILDREN", forSegmentAt: 1)
-            
-            btnCreate.isHidden = (segmentType.selectedSegmentIndex == 0)
             
             guard let user = Backend.shared().personal else { return }
             lblName.text = user.username
@@ -203,6 +240,8 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildrenCVCell", for: indexPath) as! ChildrenCVCell
                 
                 let item = viewModel.mySubs[indexPath.row]
+                cell.btnRemove.tag = indexPath.row
+                cell.btnRemove.addTarget(self, action: #selector(btnRemoveChildTapped(_:)), for: .touchUpInside)
                 cell.showInfo(item as! FDChild)
                 
                 return cell

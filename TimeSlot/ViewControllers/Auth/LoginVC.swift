@@ -35,6 +35,8 @@ class LoginVC: UIViewController {
         super.viewWillAppear(animated)
         
         Backend.shared().delegate = self
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     

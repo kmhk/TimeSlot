@@ -45,8 +45,8 @@ class FDBusiness: NSObject {
         email = (dict["email"] ?? "") as! String
         phoneNumber = (dict["phoneNumber"] ?? "") as! String
         location = (dict["location"] ?? "") as! String
-        latitude = (dict["latitude"] ?? 0) as! Double
-        longitude = (dict["longitude"] ?? 0) as! Double
+        latitude = (dict["latitude"] ?? 0.0) as! Double
+        longitude = (dict["longitude"] ?? 0.0) as! Double
         photoUri = (dict["photoUri"] ?? "") as! String
         type = (dict["type"] ?? "") as! String
         service = (dict["service"] ?? "") as! String

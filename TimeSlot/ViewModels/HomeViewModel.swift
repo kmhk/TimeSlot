@@ -74,4 +74,16 @@ class HomeViewModel: NSObject {
         
         mySubs = list
     }
+    
+    
+    func removeChildren(child: FDChild, finished: FDFinishedHandler!) {
+        Backend.removeChild(child: child) { (error) in
+            if error == nil {
+                self.mySubs.removeAll {($0 as! FDChild).uid == child.uid}
+            }
+            
+            finished(error)
+        }
+    }
+    
 }
