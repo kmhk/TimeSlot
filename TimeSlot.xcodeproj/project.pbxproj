@@ -62,6 +62,7 @@
 		F3E681A924D7FD220071FDDD /* AddScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681A824D7FD220071FDDD /* AddScheduleVC.swift */; };
 		F3E681AB24D8146D0071FDDD /* SignUpRoleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681AA24D8146D0071FDDD /* SignUpRoleVC.swift */; };
 		F3E681AD24D8147E0071FDDD /* SignUpDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E681AC24D8147E0071FDDD /* SignUpDetail.swift */; };
+		F3F3FF3324E89B4D008C1C3F /* FDAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F3FF3224E89B4D008C1C3F /* FDAvailable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +125,7 @@
 		F3E681A824D7FD220071FDDD /* AddScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleVC.swift; sourceTree = "<group>"; };
 		F3E681AA24D8146D0071FDDD /* SignUpRoleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRoleVC.swift; sourceTree = "<group>"; };
 		F3E681AC24D8147E0071FDDD /* SignUpDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDetail.swift; sourceTree = "<group>"; };
+		F3F3FF3224E89B4D008C1C3F /* FDAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAvailable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				F3E3E10D24C689450015FA50 /* FDPrivateSubmission.swift */,
 				F3E3E11124C68D560015FA50 /* FDSchedule.swift */,
 				F3E3E11324C68FC30015FA50 /* FDUnavailable.swift */,
+				F3F3FF3224E89B4D008C1C3F /* FDAvailable.swift */,
 				F3E3E11524C692DC0015FA50 /* FDUser.swift */,
 			);
 			path = Backend;
@@ -415,6 +418,7 @@
 				F38B214A24C5A07C00B1DA7B /* Backend.swift in Sources */,
 				F3D89BFA24C58B46009CE11D /* BorderdView.swift in Sources */,
 				F3E3E11224C68D560015FA50 /* FDSchedule.swift in Sources */,
+				F3F3FF3324E89B4D008C1C3F /* FDAvailable.swift in Sources */,
 				F3E681AB24D8146D0071FDDD /* SignUpRoleVC.swift in Sources */,
 				F3D89BED24C58258009CE11D /* SignUpVC.swift in Sources */,
 				F3E3E10E24C689450015FA50 /* FDPrivateSubmission.swift in Sources */,
@@ -601,7 +605,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.scrimit.TimeSlot;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-scrimit-TimeSlot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -621,7 +625,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.scrimit.TimeSlot;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-scrimit-TimeSlot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

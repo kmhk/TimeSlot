@@ -44,8 +44,8 @@ class FDSchedule: NSObject {
         dict["id"] = id
         dict["uid"] = uid
         dict["type"] = type
-        dict["start"] = start!.timeIntervalSince1970 * 1000
-        dict["end"] = end!.timeIntervalSince1970 * 1000
+        dict["start"] = Int(start!.timeIntervalSince1970 * 1000)
+        dict["end"] = Int(end!.timeIntervalSince1970 * 1000)
         
         return dict
     }

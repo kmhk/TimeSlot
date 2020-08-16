@@ -31,7 +31,7 @@ class ChildrenCVCell: UICollectionViewCell {
     
     
     func showInfo(_ data: FDChild) {
-        imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: data.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+        imgViewAvatar.sd_setImage(with: URL(string: data.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
         lblName.text = data.username
         
         let formatter = DateFormatter()

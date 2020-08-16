@@ -8,8 +8,10 @@ target 'TimeSlot' do
   # Pods for TimeSlot
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'ProgressHUD'
   pod 'SDWebImage'
   pod 'JZCalendarWeekView'
+  pod 'LocationPicker'
 
 end

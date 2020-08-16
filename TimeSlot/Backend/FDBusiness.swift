@@ -23,6 +23,7 @@ class FDBusiness: NSObject {
     var latitude: Double = 0
     var longitude: Double = 0
     var has_scrimit_pass: Bool = false
+    var available_mode: Bool = false
     var scrimit_pass_expiry: Int = 0
     
     
@@ -52,6 +53,7 @@ class FDBusiness: NSObject {
         service = (dict["service"] ?? "") as! String
         goldenCoin = (dict["goldenCoin"] ?? 0) as! Int
         has_scrimit_pass = (dict["has_scrimit_pass"] ?? false) as! Bool
+        available_mode = (dict["available_mode"] ?? false) as! Bool
         scrimit_pass_expiry = (dict["scrimit_pass_expiry"] ?? 0) as! Int
         
         if let items = dict["followers"] {
@@ -79,6 +81,7 @@ class FDBusiness: NSObject {
         dict["service"] = service
         dict["goldenCoin"] = goldenCoin
         dict["has_scrimit_pass"] = has_scrimit_pass
+        dict["available_mode"] = available_mode
         dict["scrimit_pass_expiry"] = scrimit_pass_expiry
         
         var subDict = [String: String]()

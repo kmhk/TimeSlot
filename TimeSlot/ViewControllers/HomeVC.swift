@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import ProgressHUD
+import LocationPicker
 
 class HomeVC: UIViewController {
 
@@ -24,6 +25,12 @@ class HomeVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let viewModel = HomeViewModel()
+    
+    var location: Location? {
+        didSet {
+            lblLocation.text = location.flatMap({ $0.title }) ?? ""
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -75,6 +82,33 @@ class HomeVC: UIViewController {
     }
     
     
+    @IBAction func btnAvatarTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "", message: "Change your profile picture", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { (action) in
+            let imgPicker = UIImagePickerController()
+            imgPicker.delegate = self
+            imgPicker.sourceType = .photoLibrary
+            imgPicker.allowsEditing = true
+            self.present(imgPicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Take from Camera", style: .default, handler: { (action) in
+            let imgPicker = UIImagePickerController()
+            imgPicker.delegate = self
+            imgPicker.sourceType = .camera
+            imgPicker.allowsEditing = true
+            self.present(imgPicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     @objc func btnSignupContract(_ sender: UIButton) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ContractVC") as! ContractVC
         vc.contract = viewModel.myContracts[sender.tag]
@@ -117,7 +151,116 @@ class HomeVC: UIViewController {
         }
     }
     
+    @objc func lblNameTapGestureHandler(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = Backend.shared().user!.username
+            textField.placeholder = "Enter your profile name"
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            if let text =  alert.textFields![0].text {
+                self.lblName.text = text
+                self.uploadProfileName(text)
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func lblLocationTapGestureHandler(_ sender: Any) {
+        let locationPicker = LocationPickerViewController()
+        locationPicker.location = location
+        locationPicker.showCurrentLocationButton = true
+        locationPicker.useCurrentLocationAsHint = true
+        locationPicker.selectCurrentLocationInitially = true
+        
+        locationPicker.completion = { self.location = $0; self.uploadLocation(self.location!) }
+        
+        tabBarController?.navigationController?.pushViewController(locationPicker, animated: true)
+    }
+    
+    
     // MARK: private method
+    
+    func uploadUserInfo(_ info: Any) {
+        if let user = info as? FDBusiness {
+            ProgressHUD.show()
+            Backend.updateBusiness(user: user) { (error) in
+                ProgressHUD.dismiss()
+                if error != nil {
+                    let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+            }
+            
+        } else if let user = info as? FDPersonal {
+            ProgressHUD.show()
+            Backend.updatePersonal(user: user) { (error) in
+                ProgressHUD.dismiss()
+                if error != nil {
+                    let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+            }
+        }
+    }
+    
+    
+    func uploadProfileName(_ name: String) {
+        if Backend.shared().business != nil {
+            Backend.shared().business!.username = name
+            self.uploadUserInfo(Backend.shared().business!)
+            
+        } else if Backend.shared().personal != nil {
+            Backend.shared().personal!.username = name
+            self.uploadUserInfo(Backend.shared().personal!)
+        }
+    }
+    
+    
+    func uploadLocation(_ loc: Location) {
+        if Backend.shared().business != nil {
+            Backend.shared().business!.location = loc.title ?? ""
+            Backend.shared().business!.longitude = loc.coordinate.longitude
+            Backend.shared().business!.latitude = loc.coordinate.latitude
+            self.uploadUserInfo(Backend.shared().business!)
+            
+        } else if Backend.shared().personal != nil {
+            Backend.shared().personal!.location = loc.title ?? ""
+            self.uploadUserInfo(Backend.shared().personal!)
+        }
+    }
+    
+    
+    func uploadProfileImage(image: UIImage) {
+        ProgressHUD.show()
+        
+        Backend.uploadProfileImage(Backend.shared().user!.uid, image: image) { (error, url) in
+            ProgressHUD.dismiss()
+            
+            if error != nil || url == nil {
+                let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if Backend.shared().business != nil {
+                Backend.shared().business!.photoUri = url!.absoluteString
+                self.uploadUserInfo(Backend.shared().business!)
+                
+            } else if Backend.shared().personal != nil {
+                Backend.shared().personal!.photoUri = url!.absoluteString
+                self.uploadUserInfo(Backend.shared().personal!)
+            }
+        }
+    }
+    
+    
     private func setupUI() {
         imgViewAvatar.layer.cornerRadius = imgViewAvatar.frame.width / 2
         imgViewAvatar.clipsToBounds = true
@@ -134,6 +277,12 @@ class HomeVC: UIViewController {
         btnEditProfile.clipsToBounds = true
         btnEditProfile.layer.borderWidth = 1
         btnEditProfile.layer.borderColor = UIColor.white.cgColor
+        
+        lblName.isUserInteractionEnabled = true
+        lblName.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(lblNameTapGestureHandler(_:))))
+        
+        lblLocation.isUserInteractionEnabled = true
+        lblLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(lblLocationTapGestureHandler(_:))))
         
         btnCreate.layer.cornerRadius = btnUploadAvatar.frame.height / 2
         btnCreate.clipsToBounds = true
@@ -154,11 +303,12 @@ class HomeVC: UIViewController {
             segmentType.setTitle("UNAVAILABLE", forSegmentAt: 1)
             
             guard let user = Backend.shared().business else { return }
+            if user.available_mode == true {segmentType.setTitle("AVAILABLE", forSegmentAt: 1)}
             lblName.text = user.username
             lblLocation.text = user.location
             lblEmail.text = user.email
             lblPhone.text = user.phoneNumber
-            imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewAvatar.sd_setImage(with: URL(string: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             
             viewModel.getContracts(id: Backend.shared().user!.uid)
             viewModel.getUnavailables(id: Backend.shared().user!.uid)
@@ -171,7 +321,7 @@ class HomeVC: UIViewController {
             lblLocation.text = user.location
             lblEmail.text = user.email
             lblPhone.text = user.phoneNumber
-            imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewAvatar.sd_setImage(with: URL(string: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             
             viewModel.getContractsOfCoach(id: Backend.shared().user!.uid)
             viewModel.getChildrens(id: Backend.shared().user!.uid)
@@ -209,7 +359,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                 cell.lblRate.text = String(format: "$ %.2f/HR", item.hourlyRate)
                 
                 if let coach = Backend.getBusiness(item.businessId) {
-                    cell.imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+                    cell.imgViewAvatar.sd_setImage(with: URL(string: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                     cell.lblOwner.text = coach.username
                 }
                 
@@ -220,7 +370,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                 cell.lblRate.text = String(format: "$ %.2f/HR", item.hourlyRate)
                 
                 if let coach = Backend.getBusiness(item.businessId) {
-                    cell.imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+                    cell.imgViewAvatar.sd_setImage(with: URL(string: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                     cell.lblOwner.text = coach.username
                 }
             }
@@ -232,7 +382,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UnavailableCVCell", for: indexPath) as! UnavailableCVCell
                 
                 let item = viewModel.mySubs[indexPath.row]
-                cell.showData(item as! FDUnavailable)
+                cell.showData(item)
                 
                 return cell
                 
@@ -261,4 +411,20 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
         UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
+}
+
+
+// MARK: -
+extension HomeVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as! UIImage
+        self.imgViewAvatar.image = image
+        
+        picker.dismiss(animated: true, completion: nil)
+        self.uploadProfileImage(image: image)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }

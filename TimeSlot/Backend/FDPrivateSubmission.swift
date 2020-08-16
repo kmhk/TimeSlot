@@ -42,8 +42,8 @@ class FDPrivateSubmission: NSObject {
         dict["id"] = id
         dict["businessId"] = businessId
         dict["contractId"] = contractId
-        dict["start"] = start!.timeIntervalSince1970 * 1000
-        dict["end"] = end!.timeIntervalSince1970 * 1000
+        dict["start"] = Int(start!.timeIntervalSince1970 * 1000)
+        dict["end"] = Int(end!.timeIntervalSince1970 * 1000)
         dict["userId"] = userId
         dict["confirmed"] = confirmed
         

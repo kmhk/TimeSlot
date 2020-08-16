@@ -41,7 +41,7 @@ class ListDetailUserCell: UITableViewCell {
             
             lblName.text = user.username
             
-            imgAvatar.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgAvatar.sd_setImage(with: URL(string: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             imgAvatar.layer.cornerRadius = imgAvatar.frame.width / 2
             imgAvatar.clipsToBounds = true
             
@@ -57,7 +57,7 @@ class ListDetailUserCell: UITableViewCell {
             
             lblName.text = user.username
             
-            imgAvatar.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgAvatar.sd_setImage(with: URL(string: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             imgAvatar.layer.cornerRadius = imgAvatar.frame.width / 2
             imgAvatar.clipsToBounds = true
             

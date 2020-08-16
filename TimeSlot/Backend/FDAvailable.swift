@@ -1,23 +1,14 @@
 //
-//  FDUnavailable.swift
+//  FDAvailable.swift
 //  TimeSlot
 //
-//  Created by com on 7/20/20.
+//  Created by com on 8/16/20.
 //  Copyright © 2020 com. All rights reserved.
 //
 
 import UIKit
 
-
-enum RepeatType: Int {
-    case normal = 0
-    case all_day
-    case daily
-    case weekly
-}
-
-
-class FDUnavailable: NSObject {
+class FDAvailable: NSObject {
     var id: String = ""
     var businessId: String = ""
     var title: String = ""
@@ -56,7 +47,7 @@ class FDUnavailable: NSObject {
         let endInt = (dict["end"] ?? 0) as! Int
         end = Date(timeIntervalSince1970: TimeInterval(endInt / 1000))
         
-        let startTimeInt = (dict["startTime"] ?? 0) as! Int
+        let startTimeInt = ((dict["startTime"] ?? 0) as! NSNumber).intValue
         startTime = Date(timeIntervalSince1970: TimeInterval(startTimeInt / 1000))
         
         duration = (dict["duration"] ?? 0) as! Int

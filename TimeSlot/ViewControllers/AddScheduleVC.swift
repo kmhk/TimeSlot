@@ -117,54 +117,103 @@ class AddScheduleVC: UIViewController {
     
     @IBAction func btnCreateTapped(_ sender: Any) {
         guard let title = txtTitle.text, let note = txtNote.text, let startDate = txtStartDate.text, let endDate = txtEndDate.text else { return }
-        guard switchAllDay.isOn == false, let startTime = txtStartTime.text, let endTime = txtEndTime.text else { return }
+        guard let startTime = txtStartTime.text, let endTime = txtEndTime.text else { return }
         
         let formater = DateFormatter()
         
-        let submission = FDUnavailable([:])
-        
-        submission.businessId = Backend.shared().business!.uid
-        submission.title = title
-        submission.note = note
-        
-        formater.dateFormat = "MMM dd, yyyy"
-        submission.start = formater.date(from: startDate)
-        submission.end = formater.date(from: endDate)
-        
-        submission.allDay = switchAllDay.isOn
-        if switchAllDay.isOn == false {
-            formater.dateFormat = "HH:mm"
-            submission.startTime = formater.date(from: startTime)
+        if Backend.shared().business!.available_mode == true {
+            let submission = FDAvailable([:])
             
-            let endTime = formater.date(from: endTime)
-            submission.duration = Int(endTime!.timeIntervalSince(submission.startTime!))
+            submission.businessId = Backend.shared().business!.uid
+            submission.title = title
+            submission.note = note
             
-        } else {
-            submission.startTime = Date()
-            submission.duration = 24 * 60 * 60
-        }
-        
-        submission.repeatly = switchRepeat.isOn
-        submission.monday = switchMon.isOn
-        submission.tuesday = switchTue.isOn
-        submission.wednesday = switchWed.isOn
-        submission.thursday = switchThr.isOn
-        submission.friday = switchFri.isOn
-        submission.saturday = switchSat.isOn
-        submission.sunday = switchSun.isOn
-        
-        ProgressHUD.show()
-        Backend.submitUnavailable(submission) { (error) in
-            ProgressHUD.dismiss()
+            formater.dateFormat = "MMM dd, yyyy"
+            submission.start = formater.date(from: startDate)
+            submission.end = formater.date(from: endDate)
             
-            guard error == nil else {
-                let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
+            submission.allDay = switchAllDay.isOn
+            if switchAllDay.isOn == false {
+                formater.dateFormat = "HH:mm"
+                submission.startTime = formater.date(from: startTime)
+                
+                let endTime = formater.date(from: endTime)
+                submission.duration = Int(endTime!.timeIntervalSince(submission.startTime!))
+                
+            } else {
+                submission.startTime = Date()
+                submission.duration = 24 * 60 * 60
             }
             
-            self.navigationController?.popViewController(animated: true)
+            submission.repeatly = switchRepeat.isOn
+            submission.monday = switchMon.isOn
+            submission.tuesday = switchTue.isOn
+            submission.wednesday = switchWed.isOn
+            submission.thursday = switchThr.isOn
+            submission.friday = switchFri.isOn
+            submission.saturday = switchSat.isOn
+            submission.sunday = switchSun.isOn
+            
+            ProgressHUD.show()
+            Backend.submitAvailable(submission) { (error) in
+                ProgressHUD.dismiss()
+                
+                guard error == nil else {
+                    let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        } else {
+            let submission = FDUnavailable([:])
+            
+            submission.businessId = Backend.shared().business!.uid
+            submission.title = title
+            submission.note = note
+            
+            formater.dateFormat = "MMM dd, yyyy"
+            submission.start = formater.date(from: startDate)
+            submission.end = formater.date(from: endDate)
+            
+            submission.allDay = switchAllDay.isOn
+            if switchAllDay.isOn == false {
+                formater.dateFormat = "HH:mm"
+                submission.startTime = formater.date(from: startTime)
+                
+                let endTime = formater.date(from: endTime)
+                submission.duration = Int(endTime!.timeIntervalSince(submission.startTime!))
+                
+            } else {
+                submission.startTime = Date()
+                submission.duration = 24 * 60 * 60
+            }
+            
+            submission.repeatly = switchRepeat.isOn
+            submission.monday = switchMon.isOn
+            submission.tuesday = switchTue.isOn
+            submission.wednesday = switchWed.isOn
+            submission.thursday = switchThr.isOn
+            submission.friday = switchFri.isOn
+            submission.saturday = switchSat.isOn
+            submission.sunday = switchSun.isOn
+            
+            ProgressHUD.show()
+            Backend.submitUnavailable(submission) { (error) in
+                ProgressHUD.dismiss()
+                
+                guard error == nil else {
+                    let alert = UIAlertController(title: nil, message: error!.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     

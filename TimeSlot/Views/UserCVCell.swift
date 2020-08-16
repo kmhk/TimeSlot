@@ -60,7 +60,7 @@ class UserCVCell: UICollectionViewCell {
         if let item = data as? FDBusiness {
             imgPin.image = UIImage(systemName: "hand.thumbsup")
             lblLocation.text = item.service
-            imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: item.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewAvatar.sd_setImage(with: URL(string: item.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblName.text = item.username
             
             if item.followers.contains(Backend.shared().user!.uid) {
@@ -79,7 +79,7 @@ class UserCVCell: UICollectionViewCell {
         } else if let item = data as? FDPersonal {
             imgPin.image = UIImage(systemName: "mappin.and.ellipse")
             lblLocation.text = item.location
-            imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: item.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewAvatar.sd_setImage(with: URL(string: item.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblName.text = item.username
             
             let me = Backend.shared().business!

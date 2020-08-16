@@ -43,7 +43,7 @@ class ListDetailClientCell: UITableViewCell {
             lblName.text = owner.username
             lblRole.text = owner.service.uppercased() + " COACH"
             
-            imgAvatar.sd_setImage(with: URL(fileURLWithPath: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgAvatar.sd_setImage(with: URL(string: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             imgAvatar.layer.cornerRadius = imgAvatar.frame.width / 2
             imgAvatar.clipsToBounds = true
             
@@ -55,7 +55,7 @@ class ListDetailClientCell: UITableViewCell {
             lblName.text = owner.username
             lblRole.text = owner.service.uppercased() + " COACH"
             
-            imgAvatar.sd_setImage(with: URL(fileURLWithPath: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgAvatar.sd_setImage(with: URL(string: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             imgAvatar.layer.cornerRadius = imgAvatar.frame.width / 2
             imgAvatar.clipsToBounds = true
         }

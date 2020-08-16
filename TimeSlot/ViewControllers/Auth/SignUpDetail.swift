@@ -8,6 +8,7 @@
 
 import UIKit
 import ProgressHUD
+import LocationPicker
 
 class SignUpDetail: UIViewController {
     @IBOutlet weak var imgAvatar: UIImageView!
@@ -15,10 +16,21 @@ class SignUpDetail: UIViewController {
     @IBOutlet weak var txtLocation: UITextField!
     @IBOutlet weak var viewService: BorderdView!
     @IBOutlet weak var btnService: UIButton!
+    @IBOutlet weak var segmentType: UISegmentedControl!
+    @IBOutlet weak var lblDescription: UILabel!
+    
+    var location: Location? {
+        didSet {
+            txtLocation.text = location.flatMap({ $0.title }) ?? ""
+        }
+    }
     
     var user: FDUser?
     var pwd: String?
     var userType: UserType?
+    
+    let typeDescription = ["Available Mode lets you to select time you are available for business. You can make simple schedule for business.",
+    "Unavailable Mode lets you to select time you are unavailable for business. You can make more flexible schedule for business."]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +47,28 @@ class SignUpDetail: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.tintColor = .white
+        
+        txtLocation.delegate = self
 
         if userType == UserType.personal {
             viewService.isHidden = true
+            segmentType.isHidden = true
+            lblDescription.isHidden = true
             navigationItem.title = "Personal"
             
         } else {
             navigationItem.title = "Coach"
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if #available(iOS 13.0, *), let navigationController = navigationController {
+            let appearance = navigationController.navigationBar.standardAppearance
+            appearance.backgroundColor = navigationController.navigationBar.barTintColor
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationItem.standardAppearance = appearance
         }
     }
     
@@ -62,7 +89,11 @@ class SignUpDetail: UIViewController {
     @objc func tapGestureHandler(_ sender: Any) {
         txtLocation.resignFirstResponder()
     }
-
+    
+    @IBAction func segmentValueChanged(_ sender: Any) {
+        lblDescription.text = typeDescription[segmentType.selectedSegmentIndex]
+    }
+    
     @IBAction func btnServiceTapped(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: "Choose your service", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "soccer", style: .default, handler: { (action) in
@@ -75,6 +106,34 @@ class SignUpDetail: UIViewController {
             self.btnService.setTitle("basketball", for: .normal)
         }))
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnAvatarTapped(_ sender: Any) {
+        tapGestureHandler(self)
+        
+        let alert = UIAlertController(title: "", message: "Change your profile picture", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { (action) in
+            let imgPicker = UIImagePickerController()
+            imgPicker.delegate = self
+            imgPicker.sourceType = .photoLibrary
+            imgPicker.allowsEditing = true
+            self.present(imgPicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Take from Camera", style: .default, handler: { (action) in
+            let imgPicker = UIImagePickerController()
+            imgPicker.delegate = self
+            imgPicker.sourceType = .camera
+            imgPicker.allowsEditing = true
+            self.present(imgPicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func btnDoneTapped(_ sender: Any) {
@@ -101,7 +160,10 @@ class SignUpDetail: UIViewController {
                 man.email = self.user!.email
                 man.phoneNumber = self.user!.phoneNumber
                 man.location = location
+                man.longitude = (self.location?.coordinate.longitude ?? 0.0)
+                man.latitude = (self.location?.coordinate.latitude ?? 0.0)
                 man.service = self.btnService.title(for: .normal)!
+                man.available_mode = (self.segmentType.selectedSegmentIndex == 0 ? true : false)
                 
                 Backend.submitBusiness(user: man) { (error) in
                     ProgressHUD.dismiss()
@@ -130,6 +192,24 @@ class SignUpDetail: UIViewController {
 
 // MARK: -
 extension SignUpDetail: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == txtLocation {
+            let locationPicker = LocationPickerViewController()
+            locationPicker.location = location
+            locationPicker.showCurrentLocationButton = true
+            locationPicker.useCurrentLocationAsHint = true
+            locationPicker.selectCurrentLocationInitially = true
+            
+            locationPicker.completion = { self.location = $0 }
+            
+            navigationController?.pushViewController(locationPicker, animated: true)
+            
+            return false
+        }
+        
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         tapGestureHandler(self)
         
@@ -137,3 +217,16 @@ extension SignUpDetail: UITextFieldDelegate {
     }
 }
 
+
+extension SignUpDetail: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as! UIImage
+        self.imgAvatar.image = image
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}

@@ -73,10 +73,10 @@ class ListTVCell: UITableViewCell {
             lblStatus.textColor = (item.confirmed == true ? UIColor.green : UIColor.tsAccent)
             
             lblLocation.text = owner.location
-            imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewAvatar.sd_setImage(with: URL(string: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblOwner.text = owner.username
             
-            imgViewUser.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewUser.sd_setImage(with: URL(string: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             
         } else if let item = data as? FDGroupSubmission {
             guard let owner = Backend.getBusiness(item.businessId) else { return }
@@ -99,10 +99,10 @@ class ListTVCell: UITableViewCell {
             }
             
             lblLocation.text = owner.location
-            imgViewAvatar.sd_setImage(with: URL(fileURLWithPath: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewAvatar.sd_setImage(with: URL(string: owner.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblOwner.text = owner.username
             
-            imgViewUser.sd_setImage(with: URL(fileURLWithPath: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgViewUser.sd_setImage(with: URL(string: user.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
         }
     }
 

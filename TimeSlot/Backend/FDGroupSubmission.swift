@@ -37,7 +37,7 @@ class FDGroupSubmission: NSObject {
         let endInt = (dict["end"] ?? 0) as! Int
         end = Date(timeIntervalSince1970: TimeInterval(endInt / 1000))
         
-        confirmedMap = (dict["confirmedMap"] ?? []) as! [String: Bool]
+        confirmedMap = (dict["confirmedMap"] ?? [:]) as! [String: Bool]
         
         if let items = dict["users"] {
             users = Array((items as! [String: String]).values)
@@ -51,8 +51,8 @@ class FDGroupSubmission: NSObject {
         dict["id"] = id
         dict["businessId"] = businessId
         dict["contractId"] = contractId
-        dict["start"] = start!.timeIntervalSince1970 * 1000
-        dict["end"] = end!.timeIntervalSince1970 * 1000
+        dict["start"] = Int(start!.timeIntervalSince1970 * 1000)
+        dict["end"] = Int(end!.timeIntervalSince1970 * 1000)
         dict["confirmedMap"] = confirmedMap
         
         var subDict = [String: String]()

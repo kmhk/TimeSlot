@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 
 typealias FDFinishedHandler = (Error?) -> ()
+typealias FDUploadedHandler = (Error?, URL?) -> ()
 
 enum UserType: String {
     case personal = "personal"
@@ -43,8 +45,11 @@ class Backend: NSObject {
     static let privateContractRef = Database.database().reference(withPath: "privateContract")
     static let privateSubmissionRef = Database.database().reference(withPath: "privateSubmission")
     static let unavilableRef = Database.database().reference(withPath: "unavailable")
+    static let avilableRef = Database.database().reference(withPath: "available")
     static let scheduleRef = Database.database().reference(withPath: "schedule")
     static let userRef = Database.database().reference(withPath: "user")
+    
+    static var profileImageRef = Storage.storage().reference().child("image").child("user")
     
     var user: FDUser?
     var business: FDBusiness?
@@ -59,12 +64,33 @@ class Backend: NSObject {
     var groupContracts = [FDGroupContract]()
     var groupSubmissions = [FDGroupSubmission]()
     var unavailables = [FDUnavailable]()
+    var availables = [FDAvailable]()
     
     var delegate: BackendDelegate?
     
     
     static func shared() -> Backend {
         return backendObj
+    }
+    
+    
+    static func uploadProfileImage(_ id: String, image: UIImage, finished: FDUploadedHandler!) {
+        let imgData = image.jpegData(compressionQuality: 1.0)
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpeg"
+        
+        let dbRef = profileImageRef.child(id + ".jpg")
+        dbRef.putData(imgData!, metadata: metaData, completion: { (meta, error) in
+            if let error = error {
+                print("Profile image uploading error: \(error.localizedDescription)")
+                finished(error, nil)
+                return
+            }
+            
+            dbRef.downloadURL(completion: { (url, error) in
+                finished(error, url)
+            })
+        })
     }
     
     
@@ -114,7 +140,10 @@ class Backend: NSObject {
                                             guard error == nil else { finished(error); return }
                                             loadUnavailable { (error) in
                                                 guard error == nil else { finished(error); return }
-                                                finished(nil)
+                                                loadAvailable { (error) in
+                                                    guard error == nil else { finished(error); return }
+                                                    finished(nil)
+                                                }
                                             }
                                         }
                                     }
@@ -124,6 +153,13 @@ class Backend: NSObject {
                     }
                 }
             }
+        }
+    }
+    
+    
+    static func updatePersonal(user: FDPersonal, finished: FDFinishedHandler!) {
+        adultRef.child(user.uid).setValue(user.FDdata()) { (error, ref) in
+            finished(error)
         }
     }
     
@@ -154,6 +190,13 @@ class Backend: NSObject {
             }
             shared().personals = list
             finished(nil)
+        }
+    }
+    
+    
+    static func updateBusiness(user: FDBusiness, finished: FDFinishedHandler!) {
+        providerRef.child(user.uid).setValue(user.FDdata()) { (error, ref) in
+            finished(error)
         }
     }
     
@@ -521,6 +564,35 @@ class Backend: NSObject {
             if let delegate = shared().delegate {
                 delegate.finishedUnavailable?()
             }
+            
+            finished(nil)
+        }
+    }
+    
+    
+    static func submitAvailable(_ submission: FDAvailable, finished: FDFinishedHandler!) {
+        guard let uid = avilableRef.childByAutoId().key else { finished(nil); return }
+        submission.id = uid
+        avilableRef.child(uid).setValue(submission.FDdata()) { (error, ref) in
+            if error == nil {
+                shared().availables.append(submission)
+            }
+            
+            finished(error)
+        }
+    }
+    
+    
+    static func loadAvailable(finished: FDFinishedHandler!) {
+        avilableRef.observeSingleEvent(of: .value) { (snap) in
+            var list = [FDAvailable]()
+            for item in snap.children {
+                if let val = (item as! DataSnapshot).value {
+                    let data = FDAvailable(val as! [String: Any])
+                    list.append(data)
+                }
+            }
+            shared().availables = list
             
             finished(nil)
         }

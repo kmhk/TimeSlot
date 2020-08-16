@@ -53,9 +53,18 @@ class HomeViewModel: NSObject {
     func getUnavailables(id: String) {
         var list = [Any]()
         
-        for item in Backend.shared().unavailables {
-            if item.businessId == id {
-                list.append(item)
+        if Backend.shared().business!.available_mode == true {
+            for item in Backend.shared().availables {
+                if item.businessId == id {
+                    list.append(item)
+                }
+            }
+            
+        } else {
+            for item in Backend.shared().unavailables {
+                if item.businessId == id {
+                    list.append(item)
+                }
             }
         }
         

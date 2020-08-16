@@ -59,7 +59,7 @@ class ContractVC: UIViewController {
             lblRate.text = String(format: "$ %.2f/HR", item.hourlyRate)
             
             if let coach = Backend.getBusiness(item.businessId) {
-                imgClientAvatar.sd_setImage(with: URL(fileURLWithPath: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+                imgClientAvatar.sd_setImage(with: URL(string: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                 lblClientName.text = coach.username
             }
             
@@ -70,13 +70,13 @@ class ContractVC: UIViewController {
             lblRate.text = String(format: "$ %.2f/HR", item.hourlyRate)
             
             if let coach = Backend.getBusiness(item.businessId) {
-                imgClientAvatar.sd_setImage(with: URL(fileURLWithPath: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+                imgClientAvatar.sd_setImage(with: URL(string: coach.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                 lblClientName.text = coach.username
             }
         }
         
         if let me = Backend.shared().personal {
-            imgUserAvatar.sd_setImage(with: URL(fileURLWithPath: me.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgUserAvatar.sd_setImage(with: URL(string: me.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblUserName.text = me.username
         }
     }
@@ -311,7 +311,7 @@ extension ContractVC: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "CotnractVCChildTVCell")
         
         if indexPath.row == 0 {
-            cell.imageView!.sd_setImage(with: URL(fileURLWithPath: Backend.shared().personal!.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            cell.imageView!.sd_setImage(with: URL(string: Backend.shared().personal!.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             cell.imageView!.roundView(radius: cell.imageView!.frame.width / 2)
             cell.textLabel?.text = Backend.shared().personal!.username
             
@@ -321,7 +321,7 @@ extension ContractVC: UITableViewDataSource, UITableViewDelegate {
         let childID = Backend.shared().personal!.childIds[indexPath.row - 1]
         guard let child = Backend.getChild(childID) else { return cell }
         
-        cell.imageView!.sd_setImage(with: URL(fileURLWithPath: child.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+        cell.imageView!.sd_setImage(with: URL(string: child.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
         cell.imageView!.roundView(radius: cell.imageView!.frame.width / 2)
         cell.textLabel?.text = child.username
         
@@ -330,13 +330,13 @@ extension ContractVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            imgUserAvatar.sd_setImage(with: URL(fileURLWithPath: Backend.shared().personal!.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+            imgUserAvatar.sd_setImage(with: URL(string: Backend.shared().personal!.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
             lblUserName.text = Backend.shared().personal!.username
             
         } else {
             let childID = Backend.shared().personal!.childIds[indexPath.row - 1]
             if let child = Backend.getChild(childID) {
-                imgUserAvatar.sd_setImage(with: URL(fileURLWithPath: child.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
+                imgUserAvatar.sd_setImage(with: URL(string: child.photoUri), placeholderImage: UIImage(named: "imgAvatar"))
                 lblUserName.text = child.username
             }
         }

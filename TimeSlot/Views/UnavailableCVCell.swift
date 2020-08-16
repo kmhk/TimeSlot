@@ -33,18 +33,54 @@ class UnavailableCVCell: UICollectionViewCell {
     }
     
     
-    func showData(_ data: FDUnavailable) {
-        let formater = DateFormatter()
-        formater.dateFormat = "dd\nE"
-        lblDate.text = formater.string(from: data.start!)
+    func showData(_ t: Any) {
+        if let data = t as? FDUnavailable {
+            let formater = DateFormatter()
+            formater.dateFormat = "dd\nE"
+            lblDate.text = formater.string(from: data.start!)
+            
+            formater.dateFormat = "HH:mm"
+            lblTime.text = formater.string(from: data.startTime!) + " - " + formater.string(from: data.end!)
+            
+            lblDay.text = getDay(data)
+            
+            lblTitle.text = data.title
+            lblNote.text = data.note
+            
+        } else if let data = t as? FDAvailable {
+            let formater = DateFormatter()
+            formater.dateFormat = "dd\nE"
+            lblDate.text = formater.string(from: data.start!)
+            
+            formater.dateFormat = "HH:mm"
+            lblTime.text = formater.string(from: data.startTime!) + " - " + formater.string(from: data.end!)
+            
+            lblDay.text = getDay(data)
+            
+            lblTitle.text = data.title
+            lblNote.text = data.note
+        }
+    }
+    
+    
+    private func getDay(_ data: FDAvailable) -> String {
+        var str = ""
         
-        formater.dateFormat = "HH:mm"
-        lblTime.text = formater.string(from: data.startTime!) + " - " + formater.string(from: data.end!)
+        str += (data.monday == true ? "Mon" : "")
+        str += (str.count > 0 ? ", " : "")
+        str += (data.tuesday == true ? "Tue" : "")
+        str += (str.count > 0 ? ", " : "")
+        str += (data.wednesday == true ? "Wed" : "")
+        str += (str.count > 0 ? ", " : "")
+        str += (data.thursday == true ? "Thr" : "")
+        str += (str.count > 0 ? ", " : "")
+        str += (data.friday == true ? "Fri" : "")
+        str += (str.count > 0 ? ", " : "")
+        str += (data.saturday == true ? "Sat" : "")
+        str += (str.count > 0 ? ", " : "")
+        str += (data.sunday == true ? "Sun" : "")
         
-        lblDay.text = getDay(data)
-        
-        lblTitle.text = data.title
-        lblNote.text = data.note
+        return str
     }
     
     
